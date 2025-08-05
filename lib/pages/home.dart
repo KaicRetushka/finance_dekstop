@@ -11,11 +11,18 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   String login = '';
 
+  Future<void> init() async {
+    login = await PostgresQuery.selectLogin();
+    setState(() {
+      login;
+    });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // PostgresQuery.selectName(login);
+    init();
   }
 
   @override
@@ -25,8 +32,10 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         backgroundColor: Colors.blue,
         leading: SizedBox(),
+        actions: [
+          TextButton(onPressed: (){}, child: Text(login))
+        ],
       ),
-      body: Text(login),
     );
   }
 }

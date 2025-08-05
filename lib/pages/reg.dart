@@ -22,6 +22,20 @@ class _RegState extends State<Reg> {
   String errPWD = '';
   String errRepeatPWD = '';
 
+  Future<void> init() async {
+    bool isAuth = await PostgresQuery.checkAuth();
+    if (isAuth){
+      Navigator.pushNamed(context, '/home');
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    init();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
